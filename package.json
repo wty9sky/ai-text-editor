@@ -1,0 +1,12 @@
+{
+  "name": "ai-editor-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r dev",
+    "build": "pnpm -r build"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
