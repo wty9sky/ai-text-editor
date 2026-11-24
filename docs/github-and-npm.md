@@ -26,7 +26,7 @@
 
 一次性准备：
 
-1. 仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**。
+1. 仓库 Pages 已启用，Source 为 **GitHub Actions**（`build_type: workflow`，发布分支 `main`）；换到新仓库时需管理员在 Settings → Pages → Build and deployment → Source 手动选择一次。
 2. 仓库 Settings → Secrets and variables → Actions → New repository secret，新增 `NPM_TOKEN`，值为具有 `Automation` 权限的 npm token（不要用账号密码）。发布工作流用它作为 `NODE_AUTH_TOKEN`；`.npmrc` 中不写入任何 token。
 3. 若站点使用自定义域名，新增 repository variable `DOCS_BASE=/`；默认按项目页处理，基础路径为 `/<仓库名>/`。该值在构建时注入 VitePress 的 `base`。
 4. 建议给 `master` / `main` 开启分支保护，要求 CI 通过后再合并；发布只允许维护者创建 Release。
@@ -65,7 +65,7 @@ git remote add origin git@github.com:<OWNER>/<REPO>.git
 git push -u origin master
 ```
 
-推送后打开仓库的 Actions 页确认 CI 与 Deploy docs 运行成功；Pages 首次部署需要等待数十秒，访问地址见仓库 Settings → Pages。
+推送后打开仓库的 Actions 页确认 CI 与 Deploy docs 运行成功；每次推送到 `main` 都会自动重新部署文档站，地址为 <https://wty9sky.github.io/ai-text-editor/>。
 
 远端地址确定后，建议把 `repository` / `homepage` / `bugs` 补进上述 5 个包的 `package.json`（当前未填写，不影响发布本身）。
 
