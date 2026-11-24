@@ -1,0 +1,41 @@
+name: Publish npm
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: '输入 publish 以确认发布'
+        required: true
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.event_name == 'release' || inputs.confirm == 'publish'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name || github.ref }}
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.24.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+      - run: pnpm install --frozen-lockfile
+      - run: node scripts/release-packages.mjs check
+      - run: node scripts/release-packages.mjs pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-packages
+          path: .artifacts/npm/*.tgz
+      - run: node scripts/release-packages.mjs publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

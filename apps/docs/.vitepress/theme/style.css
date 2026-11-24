@@ -1,0 +1,557 @@
+@import 'tailwindcss';
+@source '../../../../packages/vue/src';
+
+/* ===== 设计令牌：对齐 Arco Design 蓝色体系，保证文档站与组件渲染一致 ===== */
+:root {
+  /* 表面（Arco bg-1 / bg-2 / bg-3 / border-1） */
+  --bg: #ffffff;
+  --paper: #f7f8fa;
+  --panel: #ffffff;
+  --panel-1: #f7f8fa;
+  --panel-2: #f2f3f5;
+  --panel-3: #e5e6eb;
+
+  /* 墨色（Arco gray-1..4） */
+  --ink-1: #1d2129;
+  --ink-2: #4e5969;
+  --ink-3: #86909c;
+  --ink-4: #c9cdd4;
+
+  /* 发丝边（Arco border-2 / border-1） */
+  --line: #f2f3f5;
+  --line-strong: #e5e6eb;
+
+  /* 主色（Arco arcoblue-6/5/7/1/3） */
+  --accent: #165dff;
+  --accent-hover: #4080ff;
+  --accent-ink: #0e42d2;
+  --accent-soft: #e8f3ff;
+  --accent-line: #94bfff;
+  --sel: #e8f3ff;
+
+  /* 语义（Arco danger-6 / warning-6） */
+  --down: #f53f3f;
+  --warn: #ff7d00;
+
+  /* VitePress 默认主题品牌色对齐 Arco 蓝 */
+  --vp-c-brand-1: #165dff;
+  --vp-c-brand-2: #4080ff;
+  --vp-c-brand-3: #0e42d2;
+  --vp-c-brand-soft: #e8f3ff;
+
+  /* VitePress 中性色对齐 Arco gray / border */
+  --vp-c-text-1: #1d2129;
+  --vp-c-text-2: #4e5969;
+  --vp-c-text-3: #86909c;
+  --vp-c-divider: #e5e6eb;
+  --vp-c-bg-alt: #f7f8fa;
+  --vp-c-bg-soft: #f7f8fa;
+}
+
+/* 带侧栏的文档页使用视口宽度，导航与侧栏共用同一个布局基准。 */
+.Layout:has(.VPContent.has-sidebar) {
+  --vp-layout-max-width: 100vw;
+}
+
+.VPContent.has-sidebar .VPDoc > .container,
+.VPContent.has-sidebar .VPDoc .content-container {
+  max-width: none;
+}
+
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    padding-left: var(--vp-sidebar-width);
+    padding-right: 0;
+  }
+
+  .VPContent.has-sidebar .VPDoc {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .VPContent.has-sidebar .VPDoc > .container > .content {
+    min-width: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* ===== Playground 预览区：markdownToHtml 输出的基础排版 ===== */
+.md-preview h1 { font-size: 22px; font-weight: 700; margin: 12px 0 8px; }
+.md-preview h2 { font-size: 18px; font-weight: 600; margin: 12px 0 8px; }
+.md-preview h3 { font-size: 15px; font-weight: 600; margin: 10px 0 6px; }
+.md-preview p { margin: 6px 0; line-height: 1.7; font-size: 13.5px; }
+.md-preview ul { list-style: disc; padding-left: 20px; margin: 6px 0; }
+.md-preview ol { list-style: decimal; padding-left: 20px; margin: 6px 0; }
+.md-preview li { margin: 2px 0; font-size: 13.5px; }
+.md-preview blockquote { border-left: 2px solid var(--line-strong); padding-left: 10px; margin: 8px 0; color: var(--ink-2); font-style: italic; }
+.md-preview code { font-family: ui-monospace, monospace; font-size: 12px; background: var(--panel-2); padding: 1px 4px; border-radius: 4px; }
+.md-preview pre { background: var(--panel-2); padding: 10px; border-radius: 6px; overflow-x: auto; margin: 8px 0; }
+.md-preview pre code { background: transparent; padding: 0; }
+.md-preview table { border-collapse: collapse; margin: 8px 0; }
+.md-preview th, .md-preview td { border: 1px solid var(--line); padding: 4px 8px; font-size: 12.5px; }
+.md-preview hr { border: none; border-top: 1px solid var(--line-strong); margin: 12px 0; }
+
+/* VitePress 深色模式下的组件底（对齐 Arco dark 色板） */
+.dark {
+  /* 表面（Arco dark bg-1/2/3） */
+  --bg: #17171a;
+  --paper: #17171a;
+  --panel: #17171a;
+  --panel-1: #232324;
+  --panel-2: #232324;
+  --panel-3: #2a2a2b;
+
+  /* 墨色 */
+  --ink-1: #e5e6eb;
+  --ink-2: #c5c7cb;
+  --ink-3: #86909c;
+  --ink-4: #6b7280;
+
+  /* 发丝边 */
+  --line: #2e2e30;
+  --line-strong: #3a3a3d;
+
+  /* 主色 */
+  --accent: #3c7eff;
+  --accent-hover: #5e97ff;
+  --accent-ink: #94bfff;
+  --accent-soft: rgba(60, 126, 255, 0.18);
+  --accent-line: rgba(60, 126, 255, 0.4);
+  --sel: color-mix(in oklab, var(--accent) 22%, var(--panel));
+
+  /* 语义 */
+  --down: #f76965;
+  --warn: #ff9a2e;
+
+  /* VitePress 品牌色 */
+  --vp-c-brand-1: #3c7eff;
+  --vp-c-brand-2: #4080ff;
+  --vp-c-brand-3: #94bfff;
+  --vp-c-brand-soft: rgba(60, 126, 255, 0.18);
+
+  /* VitePress 中性色 */
+  --vp-c-text-1: #e5e6eb;
+  --vp-c-text-2: #c5c7cb;
+  --vp-c-text-3: #86909c;
+  --vp-c-divider: #2e2e30;
+}
+
+/* ============================================================
+   首页 · 对齐 Arco Design 视觉语言
+
+   说明：VitePress 会把 frontmatter.pageClass 加在最外层 .Layout 上
+   （即 .home-page），而正文渲染在 .vp-doc 容器内。VitePress 对
+   .vp-doc 内部元素有一组默认文档样式（.vp-doc h1 / .vp-doc p /
+   .vp-doc a 等，优先级 (0,1,1)），会压过单类选择器 (0,1,0)。
+   因此这里统一加 .home-page 前缀把优先级提升到 (0,2,0)，
+   确保首页视觉正确呈现。
+   ============================================================ */
+
+/* 首页内容更宽 */
+.home-page .vp-doc {
+  max-width: 1180px;
+}
+
+/* Playground 独立使用整屏宽度，避免默认无侧栏文档的内容宽度限制。 */
+.Layout.playground-page {
+  --vp-layout-max-width: 100%;
+}
+
+.playground-page .VPContent .VPDoc {
+  padding-left: clamp(16px, 2vw, 32px);
+  padding-right: clamp(16px, 2vw, 32px);
+}
+
+.Layout.playground-page .VPContent .VPDoc > .container,
+.Layout.playground-page .VPContent .VPDoc > .container > .content,
+.Layout.playground-page .VPContent .VPDoc .content-container {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.Layout.playground-page .VPContent .VPDoc > .container > .content {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Keep the image studio and its viewport controls within the desktop fold. */
+.Layout.image-playground-page .VPContent .VPDoc { padding: 0 12px 8px; }
+.image-playground-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 8px 4px; }
+.image-playground-heading h1 { margin: 0; font-size: 16px; line-height: 24px; letter-spacing: normal; }
+.image-playground-heading .playground-navigation { margin: 0; gap: 4px; }
+.image-playground-heading .playground-navigation a { padding: 3px 8px; font-size: 13px; line-height: 20px; }
+@media (min-width: 860px) {
+  .image-playground-page .image-workbench { --image-height: max(320px, calc(100dvh - var(--vp-nav-height, 64px) - 112px)); }
+}
+
+/* ---------- Hero ---------- */
+.home-page .arc-hero {
+  padding: 64px 24px 0;
+}
+.home-page .arc-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+}
+.home-page .arc-hero-left {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.home-page .arc-hero-right {
+  flex: 0 0 460px;
+  width: 460px;
+}
+.home-page .arc-hero-img {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  box-shadow: 0 12px 48px rgba(29, 33, 41, 0.12);
+}
+.home-page .arc-slogan {
+  margin: 0;
+  font-size: 48px;
+  line-height: 1.25;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-1);
+}
+.home-page .arc-slogan-grad {
+  background: linear-gradient(92.06deg, #33c2ff -17.9%, #257cff 43.39%, #165dff 99.4%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.home-page .arc-desc {
+  margin: 24px 0 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  max-width: 560px;
+}
+.home-page .arc-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+.home-page .arc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 24px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.home-page .arc-btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid var(--accent);
+}
+.home-page .arc-btn-primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+.home-page .arc-btn-ghost {
+  background: var(--bg);
+  color: var(--ink-1);
+  border: 1px solid var(--line-strong);
+}
+.home-page .arc-btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- 信任条 ---------- */
+.home-page .arc-trust {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  margin-top: 72px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line);
+}
+.home-page .arc-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.home-page .arc-trust-item strong {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.home-page .arc-trust-item span {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+/* ---------- Section ---------- */
+.home-page .arc-sec {
+  margin-top: 96px;
+  padding: 0 24px;
+}
+.home-page .arc-sec-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+.home-page .arc-sec-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink-1);
+}
+.home-page .arc-sec-sub {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: var(--ink-3);
+}
+
+/* ---------- 快速上手（资源卡片） ---------- */
+.home-page .arc-resources {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.home-page .arc-resource {
+  padding: 28px 24px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.home-page .arc-resource:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(22, 93, 255, 0.12);
+  transform: translateY(-2px);
+}
+.home-page .arc-resource-head {
+  margin-bottom: 20px;
+}
+.home-page .arc-resource-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.home-page .arc-resource-desc {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--ink-3);
+}
+.home-page .arc-resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.home-page .arc-resource-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.home-page .arc-resource-item:hover {
+  color: var(--accent);
+}
+.home-page .arc-resource-dot {
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------- 核心特性（4 卡片） ---------- */
+.home-page .arc-features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.home-page .arc-feature {
+  padding: 24px 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--bg);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.home-page .arc-feature:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(22, 93, 255, 0.12);
+  transform: translateY(-2px);
+}
+.home-page .arc-feature-en {
+  margin-bottom: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  color: var(--accent);
+}
+.home-page .arc-feature-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.home-page .arc-feature-desc {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink-3);
+}
+
+/* ---------- 四种编辑器卡片 ---------- */
+.home-page .arc-editors {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.home-page .arc-editor {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 4px;
+  background: var(--bg);
+  text-decoration: none;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.home-page .arc-editor:hover {
+  border-color: var(--accent);
+  box-shadow: 0 6px 20px rgba(22, 93, 255, 0.12);
+  transform: translateY(-2px);
+}
+.home-page .arc-editor--active {
+  border-color: var(--accent);
+}
+.home-page .arc-editor-img {
+  display: block;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  background: var(--panel-2);
+}
+.home-page .arc-editor-body {
+  padding: 20px;
+}
+.home-page .arc-editor-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.home-page .arc-editor-desc {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-3);
+}
+.home-page .arc-editor-status {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 2px 10px;
+  font-size: 12px;
+  border-radius: 2px;
+}
+.home-page .arc-editor-status--ready {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.home-page .arc-editor-status--todo {
+  background: var(--panel-2);
+  color: var(--ink-3);
+}
+
+/* ---------- 结尾 CTA ---------- */
+.home-page .arc-cta {
+  padding: 96px 24px;
+  text-align: center;
+}
+.home-page .arc-cta-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--ink-1);
+}
+.home-page .arc-cta-sub {
+  margin: 16px 0 0;
+  font-size: 16px;
+  color: var(--ink-3);
+}
+.home-page .arc-cta-stats {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  margin-top: 40px;
+}
+.home-page .arc-cta-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.home-page .arc-cta-stat strong {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--ink-1);
+}
+.home-page .arc-cta-stat span {
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.home-page .arc-cta .arc-actions {
+  justify-content: center;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 900px) {
+  .home-page .arc-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .home-page .arc-hero-right {
+    flex: none;
+    width: 100%;
+  }
+  .home-page .arc-slogan {
+    font-size: 34px;
+  }
+  .home-page .arc-resources,
+  .home-page .arc-features,
+  .home-page .arc-editors {
+    grid-template-columns: 1fr 1fr;
+  }
+  .home-page .arc-trust {
+    gap: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .home-page .arc-resources,
+  .home-page .arc-features,
+  .home-page .arc-editors {
+    grid-template-columns: 1fr;
+  }
+  .home-page .arc-slogan {
+    font-size: 28px;
+  }
+  .home-page .arc-sec-title,
+  .home-page .arc-cta-title {
+    font-size: 26px;
+  }
+}
+
+/* Playground SDK surfaces use only their route's mounted instance. */
+.playground-workbench { border: 1px solid var(--vp-c-divider); border-radius: 12px; padding: 16px; }
+.playground-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 16px; }
+.playground-controls button, .playground-controls select, .playground-controls input { border: 1px solid var(--vp-c-divider); border-radius: 4px; padding: 4px 8px; }
+.playground-controls button:disabled { opacity: .4; }
+.playground-controls label { display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }
+.playground-controls input[type=number] { width: 80px; }
+.playground-controls input[type=file] { max-width: 240px; width: 100%; }
+.playground-workbench canvas, .playground-workbench > svg { display: block; width: 100%; height: auto; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg-soft); }

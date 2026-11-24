@@ -1,0 +1,36 @@
+{
+  "name": "@sword-editor/runtime",
+  "type": "module",
+  "version": "0.1.0",
+  "license": "MIT",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node ../../scripts/obfuscate-dist.mjs dist",
+    "watch": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0",
+    "@types/semver": "^7.7.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "semver": "^7.7.4"
+  }
+}

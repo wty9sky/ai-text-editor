@@ -1,42 +1,29 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+node_modules/
+.pnpm-store/
 
-# Dependency directories
-node_modules
-.pnpm-store
+# 构建产物
+dist/
+build/
+.output/
+.nuxt/
+.data/
+.astro/
+.turbo/
+coverage/
+*.tsbuildinfo
+.vitepress/cache/
 
-# Build outputs
-dist
-dist-ssr
-coverage
-build
-out
+# 环境变量
+.env
+.env.*
 
-# System files
+# 系统 / 编辑器
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/*
+*.log
+local-docs
 
-# IDEs
-.idea
-.vscode
-*.swp
-*.swo
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Temporary files
-*.tmp
-*~
-
-.trea
+# 本地 / CI 打包产物
+.artifacts/

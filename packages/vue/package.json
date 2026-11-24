@@ -1,0 +1,57 @@
+{
+  "name": "@sword-editor/vue",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "vue 编辑器组件库，内置文档 SDK、插件、上传与导出能力，无需单独安装 SDK",
+  "keywords": [
+    "doc-editor",
+    "vue",
+    "markdown",
+    "notion-like",
+    "plugin"
+  ],
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@lucide/vue": "^1.46.0",
+    "@sword-editor/doc-editor": "workspace:^",
+    "@sword-editor/image-editor": "workspace:^",
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.0",
+    "vite": "^8.3.5",
+    "vite-plugin-dts": "^4.5.0",
+    "vue-tsc": "^2.2.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

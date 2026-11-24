@@ -1,0 +1,12 @@
+.image-workbench .image-rail [data-tool="add"]::before { background-image: url('./icons/add.svg'); }
+.image-workbench .image-rail [data-tool="add"][aria-pressed="true"]::before { background-image: url('./icons/add-active.svg'); }
+.image-workbench .image-rail [data-tool="template"]::before { background-image: url('./icons/template.svg'); }
+.image-workbench .image-rail [data-tool="template"][aria-pressed="true"]::before { background-image: url('./icons/template-active.svg'); }
+.image-workbench .image-rail [data-tool="shape"]::before { background-image: url('./icons/shape.svg'); }
+.image-workbench .image-rail [data-tool="shape"][aria-pressed="true"]::before { background-image: url('./icons/shape-active.svg'); }
+.image-workbench .image-rail [data-tool="text"]::before { background-image: url('./icons/text.svg'); }
+.image-workbench .image-rail [data-tool="text"][aria-pressed="true"]::before { background-image: url('./icons/text-active.svg'); }
+.image-workbench .image-rail [data-tool="photo"]::before { background-image: url('./icons/photo.svg'); }
+.image-workbench .image-rail [data-tool="photo"][aria-pressed="true"]::before { background-image: url('./icons/photo-active.svg'); }
+.image-workbench .image-rail [data-tool="background"]::before { background-image: url('./icons/background.svg'); }
+.image-workbench .image-rail [data-tool="background"][aria-pressed="true"]::before { background-image: url('./icons/background-active.svg'); }

@@ -1,0 +1,64 @@
+{
+  "hash": "5891d2e2",
+  "configHash": "d97c9c44",
+  "lockfileHash": "16951e2e",
+  "browserHash": "d48fbb38",
+  "optimized": {
+    "vue": {
+      "src": "../../../../../node_modules/.pnpm/vue@3.5.45_typescript@5.9.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "53e0fdce",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../../../node_modules/.pnpm/@vue+devtools-api@7.7.10/node_modules/@vue/devtools-api/dist/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "fa671189",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../../../node_modules/.pnpm/@vueuse+core@12.8.2_typescript@5.9.3/node_modules/@vueuse/core/index.mjs",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "55e9c20a",
+      "needsInterop": false
+    },
+    "@lucide/vue": {
+      "src": "../../../../../node_modules/.pnpm/@lucide+vue@1.72.0_vue@3.5.45_typescript@5.9.3_/node_modules/@lucide/vue/dist/esm/lucide-vue.mjs",
+      "file": "@lucide_vue.js",
+      "fileHash": "f9397116",
+      "needsInterop": false
+    },
+    "docx": {
+      "src": "../../../../../node_modules/.pnpm/docx@9.15.3/node_modules/docx/dist/index.mjs",
+      "file": "docx.js",
+      "fileHash": "3801cf61",
+      "needsInterop": false
+    },
+    "html2canvas": {
+      "src": "../../../../../node_modules/.pnpm/html2canvas@1.4.1/node_modules/html2canvas/dist/html2canvas.esm.js",
+      "file": "html2canvas.js",
+      "fileHash": "d8f10edb",
+      "needsInterop": false
+    },
+    "ag-psd": {
+      "src": "../../../../../node_modules/.pnpm/ag-psd@34.2.2/node_modules/ag-psd/dist-es/index.js",
+      "file": "ag-psd.js",
+      "fileHash": "0678bee9",
+      "needsInterop": true
+    },
+    "semver": {
+      "src": "../../../../../node_modules/.pnpm/semver@7.8.6/node_modules/semver/index.js",
+      "file": "semver.js",
+      "fileHash": "31e6bf4f",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-NOARB7GC": {
+      "file": "chunk-NOARB7GC.js"
+    },
+    "chunk-HKJ2B2AA": {
+      "file": "chunk-HKJ2B2AA.js"
+    }
+  }
+}

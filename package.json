@@ -1,12 +1,37 @@
 {
-  "name": "ai-editor-monorepo",
-  "version": "1.0.0",
+  "name": "sword-editor",
+  "type": "module",
+  "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.24.0",
+  "description": "Sword Editor：文档 / 图片 / 无限画布编辑器 SDK 与 Vue / React 组件库",
+  "engines": {
+    "node": ">=22.12.0",
+    "pnpm": ">=10"
+  },
   "scripts": {
-    "dev": "pnpm -r dev",
-    "build": "pnpm -r build"
+    "dev": "pnpm -r --if-present --parallel run dev",
+    "build": "pnpm -r --if-present run build",
+    "typecheck": "pnpm -r --if-present run typecheck",
+    "lint": "eslint .",
+    "test": "pnpm -r --if-present run test -- --passWithNoTests",
+    "clean": "pnpm -r --if-present run clean",
+    "watch": "pnpm -r --if-present --parallel run watch",
+    "docs:dev": "pnpm --filter @sword-editor/docs dev",
+    "docs:build": "pnpm --filter @sword-editor/docs build",
+    "release:check": "pnpm build && pnpm typecheck && pnpm test && node scripts/check-packages.mjs",
+    "release:scope:build": "node scripts/release-packages.mjs build",
+    "release:scope:check": "node scripts/release-packages.mjs check",
+    "release:scope:pack": "node scripts/release-packages.mjs pack",
+    "release:scope:publish": "node scripts/release-packages.mjs publish",
+    "test:browser": "node packages/vue/tests/browser-smoke.mjs",
+    "test:packages": "node scripts/verify-component-packages.mjs"
   },
   "devDependencies": {
-    "typescript": "^5.0.0"
+    "@antfu/eslint-config": "^10.0.0",
+    "eslint": "^9.0.0",
+    "javascript-obfuscator": "^5.10.1",
+    "turbo": "^2.11.0",
+    "typescript": "^5.9.0"
   }
 }

@@ -1,0 +1,48 @@
+{
+  "name": "@sword-editor/doc-editor",
+  "type": "module",
+  "version": "0.1.0",
+  "description": "文档编辑器 SDK：块数据模型 + Markdown 双向转换 + 插件体系 + 内置导出器（md / docx / pdf / png），框架无关可独立发布",
+  "keywords": [
+    "doc-editor",
+    "markdown",
+    "doc-editor",
+    "sdk"
+  ],
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node ../../scripts/obfuscate-dist.mjs dist",
+    "watch": "tsc -p tsconfig.json --watch --preserveWatchOutput",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "@sword-editor/runtime": "workspace:^",
+    "docx": "^9.15.3",
+    "html2canvas": "^1.4.1"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

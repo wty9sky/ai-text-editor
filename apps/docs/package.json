@@ -1,0 +1,31 @@
+{
+  "name": "@sword-editor/docs",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "编辑器统一文档站：文档 / 图文 / 图片 / 无限画布编辑器的 Vue 与 React 组件文档",
+  "scripts": {
+    "dev": "vitepress dev . --port 5174",
+    "build": "vitepress build .",
+    "preview": "vitepress preview ."
+  },
+  "dependencies": {
+    "@lucide/vue": "^1.46.0",
+    "@sword-editor/doc-editor": "workspace:^",
+    "@sword-editor/react": "workspace:^",
+    "@sword-editor/vue": "workspace:^",
+    "lucide-react": "^1.46.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.0",
+    "vite": "^8.3.5",
+    "vitepress": "^1.6.4"
+  }
+}
