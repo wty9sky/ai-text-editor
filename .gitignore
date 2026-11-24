@@ -11,7 +11,7 @@ build/
 .turbo/
 coverage/
 *.tsbuildinfo
-.vitepress/cache/
+**/.vitepress/cache/
 
 # 环境变量
 .env
